@@ -1,5 +1,3 @@
-// Warning: this code was not tested. Probably contains small mistakes.
-
 #pragma once
 #include<string>
 #include<stack>
@@ -13,17 +11,6 @@ struct Plant {
     string name;
     int minT;
     int maxT;
-
-    Plant(const string& _name = "", int _minT = 0, int _maxT = 0) {
-        name = _name;
-        minT = _minT;
-        maxT = _maxT;
-    }
-    Plant(const Plant& other) {
-        name = other.name;
-        minT = other.minT;
-        maxT = other.maxT;
-    }
 
     bool survivesAt(int t) const {
         return minT <= t && t <= maxT;

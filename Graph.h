@@ -1,9 +1,8 @@
 #pragma once
-
 #include<iostream>
+#include"LList.h"
 using std::cout;
 
-#include"LList.h"
 typedef LList<int> IntList;
 
 // Oriented graph with ints for vertexes
@@ -40,7 +39,7 @@ public:
         }
     }
 
-    // Useful for testing
+    // For testing
     void print() {
         elem_link<int>* crrV = vs.getStart();
         elem_link<IntList>* crrList = lists.getStart();

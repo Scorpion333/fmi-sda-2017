@@ -3,6 +3,7 @@
 #include"LList.h"
 #include"Botanic1.h"
 #include"Graph.h"
+#include"Train.h"
 using std::cout;
 using std::stack;
 
@@ -22,10 +23,6 @@ void testLList() {
     cout << list.hasDuplicate();
 }
 
-void testPlant() {
-    // TODO
-}
-
 void testGraph() {
     Graph g;
     g.addEdge(1, 2);
@@ -39,19 +36,33 @@ void testGraph() {
     g.print();
 }
 
+void testTrain() {
+    PStack stack1({ "Ivan", "Petar", "Georgi" });           // Yeah, this is OK - almost all built-in structures (stack, queue, vector, ...)
+    PStack stack2({ "Maria", "Elena" });                    // can be initialized with their elements between {}
+    
+    PStack stack3;                                          // This stack is empty
+    
+    PQueue q1({ "Gabriela", "Aleks" });
+    PQueue q2({ "Dimitar", "Teadora", "Nikolai", "Ani" });  // The names are random
+
+    Train train({ stack1, stack2, stack3 }, { q1, q2 });    // I hope it's obvious what's happening here  
+    train.distribute();
+    train.print();
+}
+
 int main() {
 
     cout << "   Testing LList...\n\n";
     testLList();                    // Expected output: 1001
     cout << "\n\n";
 
-    cout << "   Testing Plant...\n\n";
-    testPlant();
-    cout << "\n\n";
-
     cout << "   Testing Graph...\n\n";
     testGraph();
-
     cout << '\n';
+
+    cout << "   Testing Train...\n\n";
+    testTrain();
+    cout << '\n';
+
     return 0;
 }
