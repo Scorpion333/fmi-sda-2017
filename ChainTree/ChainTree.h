@@ -64,16 +64,14 @@ public:
             return;
         }
         queue<int> q;           // Queue of the indexes of waiting elements
-        q.push(0);
+        q.push(0);              // We start from the root - index 0
 
         while (!q.empty()) {
             int i = q.front();
             q.pop();
-
             cout << values[i] << ' ';
-            
-            if ( left[i] != -1) q.push( left[i]);
-            if (right[i] != -1) q.push(right[i]);
+            if ( left[i] != -1)  q.push( left[i]);
+            if (right[i] != -1)  q.push(right[i]);
         }
     }
 
