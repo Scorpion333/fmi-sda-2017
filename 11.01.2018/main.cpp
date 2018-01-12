@@ -1,17 +1,19 @@
 #include<iostream>
 #include"GraphTasks.h"
-using std::cout;
+#include"ReplacingWords.h"
+#include"BinTree.h"
+using namespace std;
 
 void expect(const char* output) {                   // Useful for short tests
     cout << "\nExpected:\n" << output << "\n\n";
 }
 
-void test_graph() {
-    cout << "Testing the graph.\n\n";
+void test_bfs_and_dfs() {
+    cout << "Testing BFS and DFS.\n\n";
     IntGraph g;             
 
-    for (int vertex : {1, 2, 3, 4, 11, 12, 13, 14}) {   // "For each" syntax. (Since C++11. I use it just for short.)
-        AddTop(vertex, g);                              // It must be clear what's happening here.
+    for (int vertex : {1, 2, 3, 4, 11, 12, 13, 14}) {       // "For each" syntax. (Since C++11. I use it just for short.)
+        AddTop(vertex, g);                                  // It must be clear what's happening here.
     }                                                   
     AddRib(1, 2, g);            // The created graph:
     AddRib(1, 3, g);            // 1 -> 2, 3
@@ -33,8 +35,40 @@ void test_graph() {
     expect("1 2 3 12 13 14 4 11");
 }
 
-int main() {
-    test_graph();
+void test_reading_graph() {                       
+    cout << "Testing reading graphs.\n\n";        
+                                                  
+    IntGraph g;                             // The exmaple graph:
+    ifstream in("example1.txt");            // 15 -> 17 18      
+    read_graph(g, in);                      // 16 -> 16 17 15
+    in.close();                             // 17 -> (nothing)
+                                            // 18 -> 15
+    g.print();
+    expect(                             
+        "15 17 18"    "\n"              // "abc" "DEF" "xyz" is the same as "abcDEFxyz".
+        "16 16 17 15" "\n"              // This way a string can be written in 2 or more lines.
+        "17"          "\n"              // - much more readable if it contains '\n' signs.
+        "18 15"       "\n"              // The real (ugly) string is: "15 17 18\n16 16 17 15\n17\n18 15\n"
+    );
+}
 
+void test_start_and_begin() {
+    cout << "Testing 'start and begin' problem.\n";
+    replace_start_with_begin("example2.txt");
+    cout << "Open example2.txt to see if everything is OK.\n\n";
+}
+
+void test_reading_tree() {
+    cout << "Testing reading tree.\n\n";
+    BinTree<int> tree = tree_from_str("(5(100(200()())(300()()))(6()()))");
+    tree.print();
+    expect("200 100 300 5 6");
+}
+
+int main() {
+    test_bfs_and_dfs();
+    // test_reading_graph();
+    // test_start_and_begin();
+    // test_reading_tree();
     return 0;
 }

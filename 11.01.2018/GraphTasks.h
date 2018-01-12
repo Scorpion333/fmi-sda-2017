@@ -1,10 +1,9 @@
 #pragma once
 #include<iostream>
 #include<queue>
+#include<fstream>
 #include"LList.h"
-using std::cin;
-using std::cout;
-using std::queue;
+using namespace std;
 
 typedef LList<int> IntList;
 typedef LList<IntList> IntGraph;
@@ -125,4 +124,21 @@ void print_dfs(IntGraph& g) {
     IntList visited;
     int start = g.getStart()->inf.getStart()->inf;
     print_dfs(g, start, visited);
+}
+
+void read_graph(IntGraph &g, istream& in) {         // Reads graph from a stream - cin or a file. 
+    int vertexes, ribs;                             // Let's say that the vertexes are N, and the ribs are M.
+    in >> vertexes >> ribs;                         // The graph is written in this format:
+                                                    // 
+    int vertex;                                     //    N M
+    for (int i = 0; i < vertexes; i++) {            //    <N lines, each with one number - a vertex>
+        in >> vertex;                               //    <M lines, each with two numbers - a rib>
+        AddTop(vertex, g);                          // 
+    }                                               // See example1.txt and main.cpp for example.
+                                                     
+    int a, b;                                        
+    for (int i = 0; i < ribs; i++) {                 
+        in >> a >> b;                                
+        AddRib(a, b, g);                             
+    }                                                
 }
