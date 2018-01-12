@@ -12,9 +12,15 @@ void test_chain_tree() {
     tree.add(300, "LR");
     tree.add(6, "R");
 
-    tree.print();
+    cout << "BFS:\n";
+    tree.print_bfs();
+    expect("5 100 6 200 300");
+
+    cout << "DFS:\n";
+    tree.print_dfs();
     expect("5 100 200 300 6");
 
+    cout << "Operator[]:\n";
     for (string position : { "", "L", "LL", "LR", "R" }) {
         cout << tree[position] << ' ';
     }

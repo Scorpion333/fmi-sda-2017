@@ -1,7 +1,8 @@
 #pragma once
 #include<iostream>
-#include<vector>
 #include<string>
+#include<vector>
+#include<queue>
 using namespace std;
 
 // Chain representation of binary tree.
@@ -58,20 +59,37 @@ public:
         return values[index_for_position(position)];
     }
 
-    // Prints root-left-right (This is also DFS for the tree.)
-    void print() const {
+    void print_bfs() {
+        if (values.empty()) {
+            return;
+        }
+        queue<int> q;           // Queue of the indexes of waiting elements
+        q.push(0);
+
+        while (!q.empty()) {
+            int i = q.front();
+            q.pop();
+
+            cout << values[i] << ' ';
+            
+            if ( left[i] != -1) q.push( left[i]);
+            if (right[i] != -1) q.push(right[i]);
+        }
+    }
+
+    // DFS == "root-left-right"
+    void print_dfs() const {
         if (!values.empty())
-            print_subtree(0);
+            print_dfs_subtree(0);
     }
 
 private:
-    // Prints root-left-right
-    void print_subtree(int root_index) const {
+    void print_dfs_subtree(int root_index) const {
         if (root_index == -1) {
             return;
         }
         cout << values[root_index] << ' ';          // Change the order of 
-        print_subtree(left[root_index]);            // these 3 lines to change 
-        print_subtree(right[root_index]);           // the order of print.
+        print_dfs_subtree(left[root_index]);            // these 3 lines to change 
+        print_dfs_subtree(right[root_index]);           // the order of print.
     }
 };
