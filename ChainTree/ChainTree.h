@@ -58,7 +58,7 @@ public:
         return values[index_for_position(position)];
     }
 
-    // Prints root-left-right
+    // Prints root-left-right (This is also DFS for the tree.)
     void print() const {
         if (!values.empty())
             print_subtree(0);
